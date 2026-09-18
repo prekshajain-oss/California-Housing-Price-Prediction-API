@@ -28,7 +28,8 @@ california-housing-api/
 ├── requirements.txt
 └── README.md
 ```
-Tech Stack
+## Tech Stack
+
 Framework: FastAPI
 
 Data & ML: Scikit-Learn, Pandas, Joblib, NumPy
