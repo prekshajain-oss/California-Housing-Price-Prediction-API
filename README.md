@@ -140,7 +140,4 @@ curl -X POST "[http://127.0.0.1:8000/predict-file](http://127.0.0.1:8000/predict
 
 ## Input Data Schema
 
-Any single payload or CSV file uploaded must contain these exact 8 features:
-Column NameTypeValid RangeDescriptionMedIncfloat> 0Median income in block group (tens of thousands USD)HouseAgefloat> 0Median house age in block groupAveRoomsfloat> 0Average number of rooms per householdAveBedrmsfloat> 0Average number of bedrooms per householdPopulationfloat> 0Total block group populationAveOccupfloat> 0Average number of household membersLatitudefloat32.0 to 42.0Latitude coordinate (California bounds)Longitudefloat-125.0 to -114.0Longitude coordinate (California bounds)
-
-
+Any single payload or CSV file uploaded must contain these exact 8 features
