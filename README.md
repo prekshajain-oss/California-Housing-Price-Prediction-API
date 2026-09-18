@@ -68,7 +68,7 @@ Interactive Swagger UI: http://127.0.0.1:8000/docs
 
 ReDoc Documentation: http://127.0.0.1:8000/redoc
 
-API Endpoints & Usage
+## API Endpoints & Usage
 1. Health Check
 Method: GET
 
@@ -76,7 +76,8 @@ Path: /health
 
 Description: Verifies service uptime and confirms model availability.
 
-**EXAMPLE RESPONSE**
+## EXAMPLE RESPONSE
+
 {
   "status": "healthy",
   "model_type": "Random Forest Regressor",
@@ -86,3 +87,12 @@ Description: Verifies service uptime and confirms model availability.
   ],
   "mae_usd": 39000
 }
+
+2. Single House Prediction
+Method: POST
+
+Path: /predict
+
+Header: Content-Type: application/json
+
+Example Request:
