@@ -69,30 +69,78 @@ Interactive Swagger UI: http://127.0.0.1:8000/docs
 ReDoc Documentation: http://127.0.0.1:8000/redoc
 
 ## API Endpoints & Usage
-1. Health Check
+## 1. Health Check
 Method: GET
 
 Path: /health
 
 Description: Verifies service uptime and confirms model availability.
 
-## EXAMPLE RESPONSE
+**EXAMPLE RESPONSE**
 
 {
   "status": "healthy",
+  
   "model_type": "Random Forest Regressor",
-  "expected_features": [
+  
+  "expected_features":
+  [
     "MedInc", "HouseAge", "AveRooms", "AveBedrms", 
     "Population", "AveOccup", "Latitude", "Longitude"
   ],
+  
   "mae_usd": 39000
+  
 }
 
-2. Single House Prediction
+## 2. Single House Prediction
 Method: POST
 
 Path: /predict
 
 Header: Content-Type: application/json
 
-Example Request:
+
+**Example Request:**
+{
+  "MedInc": 8.3252,
+  "HouseAge": 41.0,
+  "AveRooms": 6.9841,
+  "AveBedrms": 1.0238,
+  "Population": 322.0,
+  "AveOccup": 2.5555,
+  "Latitude": 37.88,
+  "Longitude": -122.23
+}
+
+**Example Response:**
+{
+  "predicted_price": "$452,600",
+  "raw_prediction": 4.526,
+  "confidence_range": "$413,600 - $491,600"
+}
+
+## 3. Batch Prediction via CSV
+
+Method: POST
+
+Path: /predict-file
+
+Content-Type: multipart/form-data
+
+Payload: Upload a .csv file with the required columns.
+
+cURL Example:
+
+curl -X POST "[http://127.0.0.1:8000/predict-file](http://127.0.0.1:8000/predict-file)" \
+  -H "accept: text/csv" \
+  -H "Content-Type: multipart/form-data" \
+  -F "file=@tests/sample_test.csv" \
+  --output predictions.csv
+
+## Input Data Schema
+
+Any single payload or CSV file uploaded must contain these exact 8 features:
+Column NameTypeValid RangeDescriptionMedIncfloat> 0Median income in block group (tens of thousands USD)HouseAgefloat> 0Median house age in block groupAveRoomsfloat> 0Average number of rooms per householdAveBedrmsfloat> 0Average number of bedrooms per householdPopulationfloat> 0Total block group populationAveOccupfloat> 0Average number of household membersLatitudefloat32.0 to 42.0Latitude coordinate (California bounds)Longitudefloat-125.0 to -114.0Longitude coordinate (California bounds)
+
+
